@@ -65,6 +65,12 @@ export default class RancherClient {
     })).data;
   }
 
+  async getEnvName() {
+    return (await this._request({
+      url: `/v1/projects/${this.projectId}`
+    })).name;
+  }
+
   buildUrl(path) {
     return $url.resolve(this.address, path);
   }

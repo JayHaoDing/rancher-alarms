@@ -34,14 +34,14 @@ export default class EmailTarget extends NotificationTarget {
     }));
   }
 
-  async notify(message) {
+  async notify(title, message) {
     all(this._recipients).map((to) => {
       info(`sending email notification to ${to}`);
       return this._sender.sendMailAsync({
         from: this._smtpSettings.from,
         to,
-        subject: 'Unhealth service alarm',
-        text: message
+        subject: title,
+        html: message
       }).then((result)=> {
         info(`sent email notification to ${to} ${JSON.stringify(result, null, 4)}`)
       });
